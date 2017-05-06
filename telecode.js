@@ -3,8 +3,18 @@ var stations = station_names.split('@').map(function(i) {
 });
 stations.shift();
 
+Array.prototype.findAll = function(fn) {
+    var arr = [];
+    this.forEach(function(i) {
+        if (fn(i)) {
+            arr.push(i);
+        }
+    });
+    return arr;
+};
+
 function query(s) {
-    return stations.find(cond(s));
+    return stations.findAll(cond(s));
 }
 
 function cond(s) {
