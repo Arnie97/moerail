@@ -1,8 +1,65 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>铁路车站代码查询</title>
+    <meta name="keywords" content="铁路 车站 代码 电报码 拼音码">
+    <meta name="author" content="Arnie97">
+    <link href="https://cdn.bootcss.com" rel="dns-prefetch">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="telecode.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+        <script src="https://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
+
 <body>
-    <script src="https://kyfw.12306.cn/otn/resources/js/framework/station_name.js"></script>
-    <script src="telecode.js"></script>
-</body></html>
+<header>
+    <div class="container jumbotron">
+        <div class="row"><div class="col-xs-12">
+            <h1>铁路车站代码查询</h1>
+            <div class="search-wraper" role="search">
+            <div class="form-group">
+                <input class="form-control search clearable" placeholder="站名 / 拼音码 / 电报码" autocomplete="off">
+                <i class="fa fa-search"></i>
+            </div>
+            </div>
+            <p>基于 <a href="https://kyfw.12306.cn/otn/czxx/init" target="_blank">12306</a> 实时数据<br>
+            当前收录 <strong id="count">0</strong> 个车站</p>
+        </div></div>
+    </div>
+    <img id="ribbon" usemap="#triangle" src="https://aral.github.io/fork-me-on-github-retina-ribbons/right-graphite@2x.png" alt="Fork me on GitHub">
+    <map name="triangle" id="triangle">
+        <area shape="poly" coords="194,194,194,0,0,0" href="https://github.com/Arnie97/telecode">
+    </map>
+</header>
+
+<main class="container">
+    <div class="row"><div class="col-xs-12 col-md-8 col-md-offset-2">
+        <table class="table">
+            <thead>
+                <tr><th>站名</th><th>电报码</th><th>拼音码</th></tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div></div>
+</main>
+
+<footer><div class="container">
+    <span>Designed by <a href="https://github.com/Arnie97" target="_blank">Arnie97</a></span>
+    /
+    <span>Hosted on <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></span>
+</div></footer>
+
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://kyfw.12306.cn/otn/resources/js/framework/station_name.js"></script>
+<script src="telecode.js"></script>
+
+</body>
+</html>

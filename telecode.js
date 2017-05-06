@@ -13,8 +13,32 @@ Array.prototype.findAll = function(fn) {
     return arr;
 };
 
+String.prototype.format = function(args) {
+    return this.replace(/{(\d+)}/g, function(match, number) {
+        return typeof args[number] != 'undefined'? args[number]: match;
+    });
+};
+
+function main() {
+    $('#count').text(stations.length);
+    $('img#ribbon').on('click', function() {
+        $('input.search').focus();
+    });
+
+    query('北京');
+    $('input.search').focus();
+    $('input.search').on('change', function() {
+        var inputText = $('input.search').val();
+        query(inputText);
+    });
+}
+
 function query(s) {
-    return stations.findAll(cond(s));
+    var results = stations.findAll(cond(s));
+    var tableRows = results.map(function(i) {
+        return '<tr><td>{1}</td><td>-{2}</td><td>{0}</td></tr>'.format(i);
+    });
+    $('table>tbody').html(tableRows.join());
 }
 
 function cond(s) {
@@ -32,3 +56,5 @@ function cond(s) {
         });
     }
 }
+
+$(main);
