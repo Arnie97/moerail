@@ -36,7 +36,9 @@ function main() {
 function query(s) {
     var results = stations.findAll(cond(s));
     var tableRows = results.map(function(i) {
-        return '<tr><td>{1}</td><td>-{2}</td><td>{0}</td></tr>'.format(i);
+        var pair = bureaus[i[2].slice(-1)] || '';
+        i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
+        return '<tr><td>{1}</td><td>{6}</td><td>-{2}</td><td>{0}</td></tr>'.format(i);
     });
     $('table>tbody').html(tableRows.join());
 }
