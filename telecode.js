@@ -20,20 +20,35 @@ String.prototype.format = function(args) {
 };
 
 function main() {
-    $('#count').text(stations.length);
+    $('#stations').text(stations.length);
     $('img#ribbon').on('click', function() {
         $('input.search').focus();
+    });
+    $('a#route>img').on('error', function() {
+        $('a#route').addClass('hidden');
     });
 
     query('北京');
     $('input.search').focus();
     $('input.search').on('change', function() {
-        var inputText = $('input.search').val();
+        var inputText = $('input.search').val().toUpperCase();
+        $('input.search').val(inputText);
         query(inputText);
     });
 }
 
 function query(s) {
+    if (s.match(/[GDgd]\d{1,4}/)) {
+        var url = '/img/{0}.png'.format([s]);
+        $('a#route>img').attr('src', url);
+        $('a#route').attr('href', url);
+        $('a#route').removeClass('hidden');
+        $('table').addClass('hidden');
+        return;
+    } else {
+        $('a#route').addClass('hidden');
+        $('table').removeClass('hidden');
+    }
     var results = stations.findAll(cond(s));
     var tableRows = results.map(function(i) {
         var pair = bureaus[i[2].slice(-1)] || '';
