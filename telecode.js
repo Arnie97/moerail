@@ -38,7 +38,7 @@ function main() {
 }
 
 function query(s) {
-    if (s.match(/[GDgd]\d{1,4}/)) {
+    if (s.match(/[GDC]\d{1,4}/i)) {
         var url = '/img/{0}.png'.format([s]);
         $('a#route>img').attr('src', url);
         $('a#route').attr('href', url);
