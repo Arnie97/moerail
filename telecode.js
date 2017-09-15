@@ -21,6 +21,7 @@ String.prototype.format = function(args) {
 
 function main() {
     $('#stations').text(stations.length);
+    $('header,footer').geopattern(Math.random().toString());
     $('img#ribbon').on('click', function() {
         $('input.search').focus();
     });
