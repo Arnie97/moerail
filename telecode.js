@@ -29,13 +29,19 @@ function main() {
         $('a#route').addClass('hidden');
     });
 
-    query('北京');
-    $('input.search').focus();
     $('input.search').on('change', function() {
-        var inputText = $('input.search').val().toUpperCase();
-        $('input.search').val(inputText);
-        query(inputText);
+        location.hash = '#' + $('input.search').val();
     });
+    $(window).on('hashchange', function() {
+        if (!location.hash) {
+            return query('北京');
+            $('input.search').focus();
+        }
+        var inputText = location.hash.slice(1).toUpperCase();
+        $('input.search').val(inputText);
+        return query(inputText);
+    });
+    $(window).trigger('hashchange');
 }
 
 function query(s) {
