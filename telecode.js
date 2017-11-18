@@ -1,24 +1,3 @@
-var stations = station_names.split('@').map(function(i) {
-    return i.split('|');
-});
-stations.shift();
-
-Array.prototype.findAll = function(fn) {
-    var arr = [];
-    this.forEach(function(i) {
-        if (fn(i)) {
-            arr.push(i);
-        }
-    });
-    return arr;
-};
-
-String.prototype.format = function(args) {
-    return this.replace(/{(\d+)}/g, function(match, number) {
-        return typeof args[number] != 'undefined'? args[number]: match;
-    });
-};
-
 function main() {
     $('#stations').text(stations.length);
     $('header,footer').geopattern(Math.random().toString());
