@@ -4,10 +4,6 @@ function main() {
     $('img#ribbon').on('click', function() {
         $('input.search').focus();
     });
-    $('a#route>img').on('error', function() {
-        $('a#route').addClass('hidden');
-    });
-
     $('input.search').on('change', function() {
         location.hash = '#' + $('input.search').val();
     });
@@ -26,7 +22,9 @@ function main() {
 function query(s) {
     if (s.match(/[GDC]\d{1,4}/i)) {
         var url = '/img/{0}.png'.format([s]);
-        $('a#route>img').attr('src', url);
+        $('a#route>img').attr('src', url).on('error', function() {
+            $(this).unbind('error').attr('src', 'img/404.png');
+        });;
         $('a#route').attr('href', url);
         $('a#route').removeClass('hidden');
         $('table').addClass('hidden');
