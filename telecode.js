@@ -1,22 +1,18 @@
-function main() {
-    $('#stations').text(stations.length);
-    $('header,footer').geopattern(Math.random().toString());
-    $('img#ribbon').on('click', function() {
-        $('input.search').focus();
-    });
-    $('a#route>img').on('error', function() {
-        $('a#route').addClass('hidden');
-    });
+function main(csvFile) {
+    records = $.csv.toArrays(csvFile);
+    $('<tr>').join(records.shift(), '<th>').appendTo('thead');
+    $('#count').text(records.length);
+    $('#loading').hide();
 
+    $('header,footer').geopattern(Math.random().toString());
     $('input.search').on('change', function() {
         location.hash = '#' + $('input.search').val();
     });
     $(window).on('hashchange', function() {
         if (!location.hash) {
-            return query('北京');
-            $('input.search').focus();
+            return $('input.search').focus();
         }
-        var inputText = location.hash.slice(1).toUpperCase();
+        var inputText = location.hash.slice(1);
         $('input.search').val(inputText);
         return query(inputText);
     });
@@ -24,40 +20,33 @@ function main() {
 }
 
 function query(s) {
-    if (s.match(/[GDC]\d{1,4}/i)) {
-        var url = '/img/{0}.png'.format([s]);
-        $('a#route>img').attr('src', url);
-        $('a#route').attr('href', url);
-        $('a#route').removeClass('hidden');
-        $('table').addClass('hidden');
-        return;
-    } else {
-        $('a#route').addClass('hidden');
-        $('table').removeClass('hidden');
-    }
-    var results = stations.findAll(cond(s));
-    var tableRows = results.map(function(i) {
-        var pair = bureaus[i[2].slice(-1)] || '';
-        i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
-        return '<tr><td>{1}</td><td>{6}</td><td>-{2}</td><td>{0}</td></tr>'.format(i);
+    $('tbody').empty();
+    s = s.toLowerCase();
+    records.forEach(function(i) {
+        if (i.some(cond(s))) {
+            $('<tr>').join(i, '<td>').appendTo('tbody');
+        }
     });
-    $('table>tbody').html(tableRows.join());
 }
 
 function cond(s) {
-    if (s.startsWith('-')) {
-        return (function(i) {
-            return i[2] === s.slice(1).toUpperCase();
-        });
-    } else if (s.charCodeAt(0) > 'z'.charCodeAt(0)) {
-        return (function(i) {
-            return i[1].startsWith(s);
-        });
+    if (s.match(/^\d+$/)) {
+        return function(i) {
+            return s === i;
+        };
     } else {
-        return (function(i) {
-            return i[0] === s.toLowerCase() || i[2] === s.toUpperCase();
-        });
+        return function(i) {
+            return i.toLowerCase().includes(s);
+        };
     }
 }
 
-$(main);
+$.fn.join = function(array, tag) {
+    var parent = this;
+    array.forEach(function(i) {
+        $(tag).text(i).appendTo(parent);
+    });
+    return this;
+};
+
+$.get('tgv.csv').then(main);
