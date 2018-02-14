@@ -14,7 +14,8 @@ function main(csvFile) {
         }
         var inputText = location.hash.slice(1);
         $('input.search').val(inputText);
-        return query(inputText);
+        query(inputText);
+        return tgvLink();
     });
     $(window).trigger('hashchange');
 }
@@ -39,6 +40,25 @@ function cond(s) {
             return i.toLowerCase().includes(s);
         };
     }
+}
+
+function tgvLink(node) {
+    $('td:nth-child(9), td:nth-child(10)').contents().each(function (i, node) {
+        while ((node = addSingleLink(node)));
+    });
+}
+
+function addSingleLink(node) {
+    var tgvCode = /\b(\d{3}|\d{5})\b(\/\d+)?/, match;
+    if (!node.nodeValue || !(match = tgvCode.exec(node.nodeValue))) {
+        return;
+    }
+    var link = $('<a>').attr('href', '#' + match[1]).text(match[0])[0];
+
+    var after = node.splitText(match.index);
+    node.parentNode.insertBefore(link, after);
+    after.nodeValue = after.nodeValue.substring(match[0].length);
+    return after;
 }
 
 $.fn.join = function(array, tag) {
