@@ -32,7 +32,7 @@ function query(s) {
 function cond(s) {
     if (s.match(/^\d+$/)) {
         return function(i) {
-            return s === i;
+            return new RegExp('\\b' + s + '\\b').test(i);
         };
     } else {
         return function(i) {
