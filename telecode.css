@@ -28,6 +28,10 @@ main {
     margin-bottom: 60px;
 }
 
+main a {
+    color: #000;
+}
+
 header, footer {
     text-align: center;
     background-color: #38c;
@@ -37,12 +41,13 @@ header, footer {
 
 header a, footer a {
     color: #f4f4f4;
-    border-bottom: dotted 1px #fff;
+    border-bottom: dotted 1px #ddd;
 }
 
 header a:hover, footer a:hover {
-    color: #f4f4f4;
-    border-bottom: solid 1px #fff;
+    color: #fff;
+    border-bottom: solid 1px #ddd;
+    text-decoration: none;
 }
 
 header {
