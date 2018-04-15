@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>铁路信息查询</title>
-    <meta name="keywords" content="铁路 信息 查询 动车组 动车 交路 车站 代码 电报码 拼音码">
+    <meta name="keywords" content="铁路 12306 信息 查询 动车组 交路 车站 代码 电报码 拼音码 TMIS">
     <meta name="author" content="Arnie97">
     <link href="https://cdn.bootcss.com" rel="dns-prefetch">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -19,11 +19,11 @@
             <h2>铁路信息查询</h2>
             <div class="search-wraper" role="search">
             <div class="form-group">
-                <input class="form-control search clearable" placeholder="动车车次 / 站名 / 拼音码 / 电报码" autocomplete="off">
+                <input class="form-control search clearable" placeholder="动车组车次 / 车站名 / 车站代码" autocomplete="off">
                 <i class="fa fa-search"></i>
             </div>
             </div>
-            <p><span class="hidden-xs">当前收录</span><span class="visible-xs-inline">共</span> <strong id="stations">0</strong> 个车站，<strong id="trains">0</strong> 个车次</p>
+            <p><span class="hidden-xs">当前收录</span><span class="visible-xs-inline">共</span> <strong id="stations">0</strong> 座车站，<strong id="trains">0</strong> 个车次</p>
             <div><a title="12306：中国铁路客户服务中心" href="https://kyfw.12306.cn/otn/czxx/init" target="_blank">车站数据</a>版本：<span id="stations_ver">...</span></div>
             <div><a title="新浪微博：CRH380AL动车组" href="https://weibo.com/2646253421/FmS9QiCrH" target="_blank">交路数据</a>版本：<span id="trains_ver">...</span></div>
             <div class="visible-md visible-lg">安装<a title="Greasy Fork：动车组交路查询" href="https://greasyfork.org/zh-CN/scripts/33266" target="_blank">浏览器扩展</a>，查询更便捷</div>
@@ -36,11 +36,16 @@
 </header>
 
 <main class="container">
-    <div class="row"><div class="col-xs-12 col-md-8 col-md-offset-2">
+    <div class="row"><div class="col-xs-12 col-md-8 col-md-offset-2 table-responsive">
         <table class="table">
-            <thead>
-                <tr><th>站名</th><th>路局</th><th>电报码</th><th>拼音码</th></tr>
-            </thead>
+            <thead><tr>
+                <th>站名</th>
+                <th>路局</th>
+                <th>省<span class="hidden-xs">份</span></th>
+                <th>电报<span class="hidden-xs">码</span></th>
+                <th>拼音<span class="hidden-xs">码</th>
+                <th>TMIS</th>
+            </tr></thead>
             <tbody>
             </tbody>
         </table>

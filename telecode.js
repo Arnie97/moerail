@@ -8,10 +8,6 @@ function main() {
         location.hash = '#' + $('input.search').val();
     });
     $(window).on('hashchange', function() {
-        if (!location.hash) {
-            return query('北京');
-            $('input.search').focus();
-        }
         var inputText = location.hash.slice(1).toUpperCase();
         $('input.search').val(inputText);
         return query(inputText);
@@ -37,15 +33,22 @@ function query(s) {
     var tableRows = results.map(function(i) {
         var pair = bureaus[i[2].slice(-1)] || '';
         i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
-        return '<tr><td>{1}</td><td>{6}</td><td>-{2}</td><td>{0}</td></tr>'.format(i);
+        return '<tr><td>{1}</td><td>{5}</td><td>{4}</td><td>-{2}</td><td>{0}</td><td>{3}</td></tr>'.format(i);
     });
     $('table>tbody').html(tableRows.join());
 }
 
 function cond(s) {
+    if (!s) {
+        s = '北京';
+    }
     if (s.startsWith('-')) {
         return (function(i) {
             return i[2] === s.slice(1).toUpperCase();
+        });
+    } else if (s.match(/\d+/)) {
+        return (function(i) {
+            return i[3].startsWith(s);
         });
     } else if (s.charCodeAt(0) > 'z'.charCodeAt(0)) {
         return (function(i) {
