@@ -5,10 +5,10 @@ function main() {
         $('input.search').focus();
     });
     $('input.search').on('change', function() {
-        location.hash = '#' + $('input.search').val();
+        location.hash = '#' + escape($('input.search').val());
     });
     $(window).on('hashchange', function() {
-        var inputText = location.hash.slice(1).toUpperCase();
+        var inputText = unescape(location.hash.slice(1)).toUpperCase();
         $('input.search').val(inputText);
         return query(inputText);
     });
@@ -56,7 +56,7 @@ function cond(s) {
         });
     } else {
         return (function(i) {
-            return i[0] === s.toLowerCase() || i[2] === s.toUpperCase();
+            return i[0] === s.toLowerCase() || i[2] === s;
         });
     }
 }
