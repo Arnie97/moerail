@@ -34,7 +34,8 @@ function query(s) {
         var pair = bureaus[i[2].slice(-1)] || '';
         i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
         i.push('https://zh.wikipedia.org/zh-cn/{0}站'.format(i[1].match(/[^(]+/)));
-        return '<tr><td><a href="{6}" target="_blank">{1}</a></td><td>{5}</td><td>{4}</td><td>-{2}</td><td>{0}</td><td>{3}</td></tr>'.format(i);
+        i.push('http://jprailfan.com/tools/stat/?telecode=-{2}'.format(i));
+        return '<tr><td><a href="{6}" target="_blank">{1}</a></td><td>{5}</td><td>{4}</td><td><a href="{7}" target="_blank">-{2}</a></td><td>{0}</td><td>{3}</td></tr>'.format(i);
     });
     $('table>tbody').html(tableRows.join());
 }
