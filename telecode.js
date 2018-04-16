@@ -13,6 +13,7 @@ function main() {
         return query(inputText);
     });
     $(window).trigger('hashchange');
+    $('table').tablesorter();
 }
 
 function query(s) {
@@ -38,6 +39,7 @@ function query(s) {
         return '<tr><td><a href="{6}" target="_blank">{1}</a></td><td>{5}</td><td>{4}</td><td><a href="{7}" target="_blank">-{2}</a></td><td>{0}</td><td>{3}</td></tr>'.format(i);
     });
     $('table>tbody').html(tableRows.join());
+    $('table').trigger('update');
 }
 
 function cond(s) {
