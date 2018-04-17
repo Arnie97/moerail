@@ -8,6 +8,10 @@ Array.prototype.findAll = function(fn) {
     return arr;
 };
 
+Array.prototype.randomElement = function() {
+    return this[Math.floor(Math.random() * this.length)];
+};
+
 String.prototype.format = function(args) {
     return this.replace(/{(\d+)}/g, function(match, number) {
         return typeof args[number] != 'undefined'? args[number]: match;

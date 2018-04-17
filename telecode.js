@@ -44,7 +44,7 @@ function query(s) {
 
 function cond(s) {
     if (!s) {
-        s = '北京';
+        s = cities.randomElement();
     }
     if (s.startsWith('-')) {
         return (function(i) {
