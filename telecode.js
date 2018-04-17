@@ -32,7 +32,7 @@ function query(s) {
     }
     var results = stations.findAll(cond(s));
     var tableRows = results.map(function(i) {
-        var pair = bureaus[i[2].slice(-1)] || '';
+        var pair = bureaus[i[2].slice(-1)] || ['', ''];
         i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
         i.push('https://zh.wikipedia.org/zh-cn/{0}站'.format(i[1].match(/[^(]+/)));
         i.push('http://jprailfan.com/tools/stat/?telecode=-{2}'.format(i));
