@@ -32,11 +32,16 @@ function query(s) {
     }
     var results = stations.findAll(cond(s));
     var tableRows = results.map(function(i) {
+        i = i.slice(0);  // clone the array
         var pair = bureaus[i[2].slice(-1)] || ['', ''];
         i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
-        i.push('https://zh.wikipedia.org/zh-cn/{0}站'.format(i[1].match(/[^(]+/)));
-        i.push('http://jprailfan.com/tools/stat/?telecode=-{2}'.format(i));
-        return '<tr><td><a href="{6}" target="_blank">{1}</a></td><td>{5}</td><td>{4}</td><td><a href="{7}" target="_blank">-{2}</a></td><td>{0}</td><td>{3}</td></tr>'.format(i);
+        if (i[2]) {
+            i[2] = '-' + i[2];
+        }
+        i.link(1, 'https://zh.wikipedia.org/zh-cn/{1}站'.format(i[1].match(/[^(]+/)));
+        i.link(2, 'https://jprailfan.com/tools/stat/?telecode={2}');
+        i.link(3, 'https://jprailfan.com/tools/stat/?statnumb={3}');
+        return '<tr><td>{1}</td><td>{5}</td><td>{4}</td><td>{2}</td><td>{0}</td><td>{3}</td></tr>'.format(i);
     });
     $('table>tbody').html(tableRows.join());
     $('table').trigger('update');

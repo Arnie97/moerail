@@ -12,6 +12,12 @@ Array.prototype.randomElement = function() {
     return this[Math.floor(Math.random() * this.length)];
 };
 
+Array.prototype.link = function(i, url) {
+    url = url.format(this);
+    var link = '<a href="{0}" target="_blank">{1}</a>';
+    return (this[i] = link.format([url, this[i]]));
+};
+
 String.prototype.format = function(args) {
     return this.replace(/{(\d+)}/g, function(match, number) {
         return typeof args[number] != 'undefined'? args[number]: match;
