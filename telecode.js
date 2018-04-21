@@ -12,8 +12,8 @@ function main() {
         $('input.search').val(inputText);
         return query(inputText);
     });
-    $(window).trigger('hashchange');
     $('table').tablesorter();
+    $(window).trigger('hashchange');
 }
 
 function query(s) {
@@ -50,14 +50,17 @@ function query(s) {
 function cond(s) {
     if (!s) {
         s = cities.randomElement();
+    } else if (s.match(/\d+/)) {
+        $('table').trigger('sorton', [[[5, 0]]]);
+        return (function(i) {
+            return i[3].startsWith(s);
+        });
     }
+
+    $('table').trigger('sorton', [[]]);
     if (s.startsWith('-')) {
         return (function(i) {
             return i[2] === s.slice(1).toUpperCase();
-        });
-    } else if (s.match(/\d+/)) {
-        return (function(i) {
-            return i[3].startsWith(s);
         });
     } else if (s.charCodeAt(0) > 'z'.charCodeAt(0)) {
         return (function(i) {
