@@ -29,12 +29,3 @@ if (!String.prototype.startsWith) {
         return this.substr(position || 0, s.length) === s;
     };
 }
-
-if (!String.prototype.includes) {
-    String.prototype.includes = function(s, position) {
-        return (
-            (position || 0) + s.length <= this.length &&
-            this.indexOf(s, position || 0) !== -1
-        );
-    };
-}
