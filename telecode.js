@@ -1,4 +1,11 @@
 function main() {
+    var ua = navigator.userAgent;
+    if (/Android/.test(ua)) {
+        $('#app,#client').removeClass('hidden');
+    } else if (/Windows NT|Macintosh|X11/.test(ua)) {
+        $('#ext,#client').removeClass('hidden');
+    }
+
     $('#stations').text(stations.length);
     $('header,footer').geopattern(Math.random().toString());
     $('img#ribbon').on('click', function() {
