@@ -8,6 +8,10 @@ html {
     background-color: transparent;
 }
 
+.table-responsive {
+    border: 0;
+}
+
 #ribbon {
     position: absolute;
     top: 0;
