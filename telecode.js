@@ -43,7 +43,7 @@ function query(s) {
         var pair = bureaus[i[2].slice(-1)] || ['', ''];
         i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
         if (i[2]) {
-            i[2] = '-' + i[2];
+            i[2] = '-' + i[2].slice(0, 3);
         }
         i.link(1, 'https://zh.wikipedia.org/zh-cn/{1}站'.format(i[1].match(/[^(]+/)));
         i.link(2, 'https://jprailfan.com/tools/stat/?telecode={2}');
@@ -67,7 +67,7 @@ function cond(s) {
     $('table').trigger('sorton', [[]]);
     if (s.startsWith('-')) {
         return (function(i) {
-            return i[2] === s.slice(1).toUpperCase();
+            return i[2].slice(0, 3) === s.slice(1).toUpperCase();
         });
     } else if (s.charCodeAt(0) > 'z'.charCodeAt(0)) {
         return (function(i) {
@@ -75,7 +75,7 @@ function cond(s) {
         });
     } else {
         return (function(i) {
-            return i[0] === s.toLowerCase() || i[2] === s;
+            return i[0] === s.toLowerCase() || i[2].slice(0, 3) === s;
         });
     }
 }
