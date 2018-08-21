@@ -47,7 +47,8 @@ function query(s) {
         }
         i.link(1, 'https://zh.wikipedia.org/zh-cn/{1}站'.format(i[1].match(/[^(]+/)));
         i.link(2, 'https://jprailfan.com/tools/stat/?telecode={2}');
-        i.link(3, 'https://jprailfan.com/tools/stat/?statnumb={3}');
+        i.link(0, 'https://jprailfan.com/tools/stat/?pinyincode={0}');
+        i.link(3, 'http://hyfw.12306.cn/hyinfo/action/FwcszsAction_czcx?hzzm&tmism={3}');
         return '<tr><td>{1}</td><td>{5}</td><td>{4}</td><td>{2}</td><td>{0}</td><td>{3}</td></tr>'.format(i);
     });
     $('table>tbody').html(tableRows.join());
