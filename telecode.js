@@ -42,10 +42,12 @@ function query(s) {
         i = i.slice(0);  // clone the array
         var pair = bureaus[i[2].slice(-1)] || ['', ''];
         i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
+        i.push(i[1].match(/[^(]+/));
         if (i[2]) {
             i[2] = '-' + i[2].slice(0, 3);
         }
-        i.link(1, 'https://zh.wikipedia.org/zh-cn/{1}站'.format(i[1].match(/[^(]+/)));
+        i.link(1, 'https://zh.wikipedia.org/zh-cn/{6}站');
+        i.link(4, 'https://www.amap.com/search?query={6}站');
         i.link(2, 'https://jprailfan.com/tools/stat/?telecode={2}');
         i.link(0, 'https://jprailfan.com/tools/stat/?pinyincode={0}');
         i.link(3, 'http://hyfw.12306.cn/hyinfo/action/FwcszsAction_czcx?hzzm&tmism={3}');
