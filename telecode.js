@@ -60,7 +60,7 @@ function query(s) {
 function cond(s) {
     if (!s) {
         s = cities.randomElement();
-    } else if (s.match(/\d+/)) {
+    } else if (s.match(/^\d+$/)) {
         $('table').trigger('sorton', [[[5, 0]]]);
         return (function(i) {
             return i[3].startsWith(s);
