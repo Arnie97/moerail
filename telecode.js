@@ -14,6 +14,16 @@ function main() {
     $('input.search').on('change', function() {
         location.hash = '#' + escape($('input.search').val());
     });
+    $('#toggle_emu_list').on('click', function() {
+        if ($('#emu_list').hasClass('hidden')) {
+            $('#emu_list').removeClass('hidden');
+            $.getJSON(API_ROOT + '/train/' + location.hash.slice(1), function(results) {
+                show(results.map(formatEMU));
+            });
+        } else {
+            $('#emu_list').addClass('hidden');
+        }
+    });
     $(window).on('hashchange', function() {
         var inputText = unescape(location.hash.slice(1)).toUpperCase();
         $('input.search').val(inputText);
@@ -24,50 +34,69 @@ function main() {
 }
 
 function query(s) {
-    if (s.match(/[GDC]\d{1,4}/i)) {
+    $('.component').addClass('hidden');
+    if (s.match(/^[GDC]\d{1,4}$/i)) {
         var url = '/img/{0}.png'.format([s]);
-        $('a#route>img').attr('src', url).on('error', function() {
+        $('#route').removeClass('hidden');
+        $('#route img').attr('src', url).on('error', function() {
             $(this).unbind('error').attr('src', 'img/404.png');
-        });;
-        $('a#route').attr('href', url);
-        $('a#route').removeClass('hidden');
-        $('table').addClass('hidden');
+        });
+        $('#route a').attr('href', url);
         return;
-    } else {
-        $('a#route').addClass('hidden');
-        $('table').removeClass('hidden');
     }
-    var results = stations.findAll(cond(s));
-    var tableRows = results.map(function(i) {
-        i = i.slice(0);  // clone the array
-        var pair = bureaus[i[2].slice(-1)] || ['', ''];
-        i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
-        i.push(i[1].match(/[^(]+/));
-        if (i[2]) {
-            i[2] = '-' + i[2].slice(0, 3);
-        }
-        i.link(1, 'https://zh.wikipedia.org/zh-cn/{6}站');
-        i.link(4, 'https://www.amap.com/search?query={6}站');
-        i.link(2, 'https://jprailfan.com/tools/stat/?telecode={2}');
-        i.link(0, 'https://jprailfan.com/tools/stat/?pinyincode={0}');
-        i.link(3, 'http://hyfw.12306.cn/hyinfo/action/FwcszsAction_czcx?hzzm&tmism={3}');
-        return '<tr><td>{1}</td><td>{5}</td><td>{4}</td><td>{2}</td><td>{0}</td><td>{3}</td></tr>'.format(i);
-    });
-    $('table>tbody').html(tableRows.join());
-    $('table').trigger('update');
+
+    var results = stations.findAll(matchKeyword(s));
+    if (results.length) {
+        $('#station_list').removeClass('hidden');
+        show(results.map(formatStation));
+    } else {
+        $('#emu_list').removeClass('hidden');
+        $.getJSON(API_ROOT + '/emu/' + s, function(results) {
+            show(results.map(formatEMU));
+        });
+    }
 }
 
-function cond(s) {
+function formatStation(i) {
+    i = i.slice(0);  // clone the array
+    var pair = bureaus[i[2].slice(-1)] || ['', ''];
+    i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
+    i.push(i[1].match(/[^(]+/));
+    if (i[2]) {
+        i[2] = '-' + i[2].slice(0, 3);
+    }
+    i.link(1, 'https://zh.wikipedia.org/zh-cn/{6}站');
+    i.link(2, 'https://jprailfan.com/tools/stat/?telecode={2}');
+    i.link(0, 'https://jprailfan.com/tools/stat/?pinyincode={0}');
+    i.link(3, 'http://hyfw.12306.cn/hyinfo/action/FwcszsAction_czcx?hzzm&tmism={3}');
+    i.link(4, 'https://www.amap.com/search?query={6}站');
+    i.link(5, API_ROOT + '/map/{6}');
+    return '<tr><td>{1}</td><td>{5}</td><td>{4}</td><td>{2}</td><td>{0}</td><td>{3}</td></tr>'.format(i);
+}
+
+function formatEMU(i) {
+    i = [i.emu_no, i.train_no, i.date.substring(0, 16)];
+    i.link(0, '/#{0}');
+    i.link(1, '/#{1}');
+    return '<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>'.format(i);
+}
+
+function show(tableRows) {
+    $('table:not(.hidden)>tbody').html(tableRows.join());
+    $('table:not(.hidden)').trigger('update');
+}
+
+function matchKeyword(s) {
     if (!s) {
         s = cities.randomElement();
     } else if (s.match(/^\d+$/)) {
-        $('table').trigger('sorton', [[[5, 0]]]);
+        $('#station_list').trigger('sorton', [[[5, 0]]]);
         return (function(i) {
             return i[3].startsWith(s);
         });
     }
 
-    $('table').trigger('sorton', [[]]);
+    $('#station_list').trigger('sorton', [[]]);
     if (s.startsWith('-')) {
         return (function(i) {
             return i[2].slice(0, 3) === s.slice(1).toUpperCase();

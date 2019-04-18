@@ -1,3 +1,4 @@
-$('#trains').text(4846);
-$('#trains_ver').text('2018.02.10');
-$('#stations_ver').text('2018.02.28');
+var API_ROOT = '';
+$('#trains').text(4765);
+$('#trains_ver').text('2019.02.21');
+$('#stations_ver').text('2019.03.15');

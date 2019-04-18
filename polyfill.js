@@ -14,7 +14,11 @@ Array.prototype.randomElement = function() {
 
 Array.prototype.link = function(i, url) {
     url = url.format(this);
-    var link = '<a href="{0}" target="_blank">{1}</a>';
+    if (url.startsWith('/')) {  // internal links
+        var link = '<a href="{0}">{1}</a>';
+    } else {  // external links
+        var link = '<a href="{0}" target="_blank">{1}</a>';
+    }
     return (this[i] = link.format([url, this[i]]));
 };
 

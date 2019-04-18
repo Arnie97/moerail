@@ -127,3 +127,16 @@ header .search::-ms-clear {
 header .search+.fa.onX {
     cursor: pointer;
 }
+
+#route {
+    position: relative;
+}
+
+#toggle_emu_list {
+    float: right;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 120%;
+    padding: 5px;
+}

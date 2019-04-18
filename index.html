@@ -39,7 +39,7 @@
 
 <main class="container">
     <div class="row"><div class="col-xs-12 col-md-8 col-md-offset-2 table-responsive">
-        <table class="table table-hover">
+        <table id="station_list" class="table table-hover component">
             <thead><tr>
                 <th>站名</th>
                 <th>路局</th>
@@ -51,9 +51,19 @@
             <tbody>
             </tbody>
         </table>
-        <a id="route" class="hidden" target="_blank">
-            <img class="img-thumbnail">
-        </a>
+        <div id="route" class="hidden component">
+            <a target="_blank"><img class="img-thumbnail"></a>
+            <i id="toggle_emu_list" class="fa fa-history"></i>
+        </div>
+        <table id="emu_list" class="table table-hover hidden component">
+            <thead><tr>
+                <th>车组号</th>
+                <th><span class="hidden-xs">担当</span>车次</th>
+                <th>日期</th>
+            </tr></thead>
+            <tbody>
+            </tbody>
+        </table>
     </div></div>
 </main>
 
