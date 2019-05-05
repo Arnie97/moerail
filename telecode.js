@@ -17,9 +17,7 @@ function main() {
     $('#toggle_emu_list').on('click', function() {
         if ($('#emu_list').hasClass('hidden')) {
             $('#emu_list').removeClass('hidden');
-            $.getJSON(API_ROOT + '/train/' + location.hash.slice(1), function(results) {
-                show(results.map(formatEMU));
-            });
+            loadEMU(API_ROOT + '/train/' + location.hash.slice(1));
         } else {
             $('#emu_list').addClass('hidden');
         }
@@ -51,9 +49,7 @@ function query(s) {
         show(results.map(formatStation));
     } else {
         $('#emu_list').removeClass('hidden');
-        $.getJSON(API_ROOT + '/emu/' + s, function(results) {
-            show(results.map(formatEMU));
-        });
+        loadEMU(API_ROOT + '/emu/' + s);
     }
 }
 
@@ -93,6 +89,20 @@ function formatEMU(i) {
     i.link(0, '/#{0}');
     i.link(1, '/#{1}');
     return '<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>'.format(i);
+}
+
+function loadEMU(url) {
+    msg = '<tr><td>-</td><td>-</td><td>{0}</td></tr>';
+    show([msg.format(['少女祈祷中…'])]);
+    $.getJSON(url).done(function(results) {
+        if (results.length) {
+            show(results.map(formatEMU));
+        } else {
+            show([msg.format(['暂未收录'])]);
+        }
+    }).fail(function() {
+        show([msg.format(['加载失败'])]);
+    });
 }
 
 function show(tableRows) {
