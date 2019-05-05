@@ -62,6 +62,20 @@ function formatStation(i) {
     var pair = bureaus[i[2].slice(-1)] || ['', ''];
     i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
     i.push(i[1].match(/[^(]+/));
+
+    var bit_mask = parseInt(i[4].slice(1), 36) || 0, prefixes = '';
+    i[4] = i[4].slice(0, 1);
+    for (var j = 0; j < restrictions.length; j++) {
+        if (bit_mask & 1 << j) {
+            if (j) {
+                prefixes += restrictions[j];
+            } else {
+                i[1] = '<span class="joint">{1}</span>'.format(i);
+            }
+        }
+    }
+    i.push(prefixes);
+
     if (i[2]) {
         i[2] = '-' + i[2].slice(0, 3);
     }
@@ -71,7 +85,7 @@ function formatStation(i) {
     i.link(3, 'http://hyfw.12306.cn/hyinfo/action/FwcszsAction_czcx?hzzm&tmism={3}');
     i.link(4, 'https://www.amap.com/search?query={6}站');
     i.link(5, API_ROOT + '/map/{6}');
-    return '<tr><td>{1}</td><td>{5}</td><td>{4}</td><td>{2}</td><td>{0}</td><td>{3}</td></tr>'.format(i);
+    return '<tr><td>{7}</td><td>{1}</td><td>{5}</td><td>{4}</td><td>{2}</td><td>{0}</td><td>{3}</td></tr>'.format(i);
 }
 
 function formatEMU(i) {
@@ -90,7 +104,7 @@ function matchKeyword(s) {
     if (!s) {
         s = cities.randomElement();
     } else if (s.match(/^\d+$/)) {
-        $('#station_list').trigger('sorton', [[[5, 0]]]);
+        $('#station_list').trigger('sorton', [[[6, 0]]]);
         return (function(i) {
             return i[3].startsWith(s);
         });

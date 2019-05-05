@@ -128,6 +128,18 @@ header .search+.fa.onX {
     cursor: pointer;
 }
 
+#station_list td:nth-child(1), #station_list th:nth-child(1) {
+    padding-right: 0px;
+}
+
+#station_list td:nth-child(2), #station_list th:nth-child(2) {
+    padding-left: 1px;
+}
+
+#station_list .joint {
+    border-bottom: black solid 1px;
+}
+
 #route {
     position: relative;
 }
