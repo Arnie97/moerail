@@ -85,9 +85,10 @@ function formatStation(i) {
 }
 
 function formatEMU(i) {
-    i = [i.emu_no, i.train_no, i.date.substring(0, 16)];
+    var train_no_link = i.train_no.split('/')[0];
+    i = [i.emu_no, i.train_no, i.date.substring(0, 16), train_no_link];
     i.link(0, '/#{0}');
-    i.link(1, '/#{1}');
+    i.link(1, '/#{3}');
     return '<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>'.format(i);
 }
 
