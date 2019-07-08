@@ -17,7 +17,7 @@ function main() {
     $('#toggle_emu_list').on('click', function() {
         if ($('#emu_list').hasClass('hidden')) {
             $('#emu_list').removeClass('hidden');
-            loadEMU(API_ROOT + '/train/' + location.hash.slice(1));
+            loadEMU(API_ROOT + '/train/' + $('input.search').val());
         } else {
             $('#emu_list').addClass('hidden');
         }
