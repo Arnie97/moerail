@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>铁路信息查询</title>
-    <meta name="keywords" content="铁路 12306 信息 查询 动车组 交路 车站 代码 电报码 拼音码 TMIS">
+    <meta name="keywords" content="铁路 12306 动车组 交路 车站 电报码 TMIS">
     <meta name="author" content="Arnie97">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.10.2/css/all.min.css" integrity="sha256-zmfNZmXoNWBMemUOo1XUGFfc0ihGGLYdgtJS3KCr/l0=" crossorigin="anonymous">
@@ -26,8 +26,11 @@
             <div><a title="95306：营业站服务信息查询" href="http://hyfw.95306.cn/hyinfo/action/FwcszsAction_index?type=1" target="_blank">车站数据</a>版本：<span id="stations_ver">...</span></div>
             <div><a title="新浪微博：CRH380AL动车组" href="https://weibo.com/u/2646253421" target="_blank">交路数据</a>版本：<span id="trains_ver">...</span></div>
             <div id="client" class="hidden">
-                安装<a id="ext" class="hidden" title="Greasy Fork：动车组交路查询" href="https://greasyfork.org/zh-CN/scripts/33266" target="_blank">浏览器扩展</a><a id="app" class="hidden" title="动车组查询 App" href="ml.moerail.apk">手机客户端</a>，查询更便捷
+                安装<a id="ext" class="hidden" target="_blank" href="https://greasyfork.org/zh-CN/scripts/33266" title="Greasy Fork：动车组交路查询">浏览器扩展</a><!--
+                ---><a id="ios" class="hidden" target="_blank" href="https://apps.apple.com/cn/app/id1471687297" title="App Store：动车组交路查询">手机客户端</a><!--
+                ---><a id="apk" class="hidden" target="_blank" href="ml.moerail.apk" title="下载动车组查询 App">手机客户端</a>，查询更便捷
             </div>
+            <div id="offline" class="hidden">当前离线，部分功能不可用</div>
         </div></div>
     </div>
     <img id="ribbon" alt="Fork me on GitHub" usemap="#triangle" src="https://cdn.jsdelivr.net/gh/aral/fork-me-on-github-retina-ribbons/images/fork-me-right-graphite@2x.png">

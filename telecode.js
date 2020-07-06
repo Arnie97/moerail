@@ -1,7 +1,11 @@
 function main() {
     var ua = navigator.userAgent;
-    if (/Android/.test(ua)) {
-        $('#app,#client').removeClass('hidden');
+    if (navigator.onLine === false) {
+        $('#offline').removeClass('hidden');
+    } else if (/Android/.test(ua)) {
+        $('#apk,#client').removeClass('hidden');
+    } else if (/iPad|iPhone|iPod/.test(ua)) {
+        $('#ios,#client').removeClass('hidden');
     } else if (/Windows NT|Macintosh|X11/.test(ua)) {
         $('#ext,#client').removeClass('hidden');
     }
