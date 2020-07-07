@@ -90,6 +90,10 @@ function formatStation(i) {
 
 function formatEMU(i) {
     var train_no_link = i.train_no.split('/')[0];
+    var match = i.emu_no.match(/^(\w+)(\d{4})$/);
+    if (match) {
+        i.emu_no = match[1] + "-" + match[2];
+    }
     i = [i.emu_no, i.train_no, i.date.substring(0, 16), train_no_link];
     i.link(0, '/#{0}');
     i.link(1, '/#{3}');
