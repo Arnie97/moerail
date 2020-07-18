@@ -1,3 +1,5 @@
+'use strict';
+
 Array.prototype.findAll = function(fn) {
     var arr = [];
     this.forEach(function(i) {
@@ -16,8 +18,10 @@ Array.prototype.link = function(i, url) {
     url = url.format(this);
     if (url.startsWith('/')) {  // internal links
         var link = '<a href="{0}">{1}</a>';
-    } else {  // external links
+    } else if (url.includes('//')) {  // external links
         var link = '<a href="{0}" target="_blank">{1}</a>';
+    } else {
+        var link = '<a onclick="{0}">{1}</a>';
     }
     return (this[i] = link.format([url, this[i]]));
 };
@@ -31,5 +35,11 @@ String.prototype.format = function(args) {
 if (!String.prototype.startsWith) {
     String.prototype.startsWith = function(s, position) {
         return this.substr(position || 0, s.length) === s;
+    };
+}
+
+if (!String.prototype.includes) {
+    String.prototype.includes = function(s, position) {
+        return this.indexOf(s, position || 0) !== -1;
     };
 }
