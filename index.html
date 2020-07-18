@@ -15,7 +15,7 @@
 <header>
     <div class="container jumbotron">
         <div class="row"><div class="col-xs-12">
-            <h2>铁路信息查询</h2>
+            <h2 data-i18n="title">铁路信息查询</h2>
             <div class="search-wraper" role="search">
             <div class="form-group">
                 <input class="form-control search clearable" placeholder="动车组车次 / 车站名 / 车站代码" autocomplete="off">
@@ -44,12 +44,12 @@
         <table id="station-list" class="table table-hover component">
             <thead><tr>
                 <th><!-- 办理限制 --></th>
-                <th>站名</th>
-                <th>路局</th>
-                <th>省<span class="hidden-xs">份</span></th>
-                <th>电报<span class="hidden-xs">码</span></th>
-                <th>拼音<span class="hidden-xs">码</th>
-                <th>TMIS</th>
+                <th data-i18n="station-name">站名</th>
+                <th data-i18n="station-company">路局</th>
+                <th data-i18n="station-province">省<span class="hidden-xs">份</span></th>
+                <th data-i18n="station-telegraph">电报<span class="hidden-xs">码</span></th>
+                <th data-i18n="station-pinyin">拼音<span class="hidden-xs">码</th>
+                <th data-i18n="station-tmis">TMIS</th>
             </tr></thead>
             <tbody>
             </tbody>
@@ -73,6 +73,8 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/tablesorter@2.31.1/dist/js/jquery.tablesorter.min.js" integrity="sha256-uC1JMW5e1U5D28+mXFxzTz4SSMCywqhxQIodqLECnfU=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-i18n-properties@1.2.7/jquery.i18n.properties.min.js" integrity="sha256-5YyE0WhrAHKo7h3XyvKQgMhH9g3e0TG8Y9VR36Pm87A=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@wikimedia/jquery.i18n@1.0.7/src/jquery.i18n.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/gh/btmills/geopattern@1.2.3/js/geopattern.min.js" integrity="sha256-AOyAcXCKLfI+FRdiZr4VTj9h9Wwv0YXXa2CPfUWbBS8=" crossorigin="anonymous"></script>
 <script src="station_name.js"></script>
 <script src="polyfill.js"></script>
