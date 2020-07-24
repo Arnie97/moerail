@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>铁路信息查询</title>
+    <title data-i18n="app-title">铁路信息查询</title>
     <meta name="keywords" content="铁路 12306 动车组 交路 车站 电报码 TMIS">
     <meta name="author" content="Arnie97">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
@@ -15,22 +15,19 @@
 <header>
     <div class="container jumbotron">
         <div class="row"><div class="col-xs-12">
-            <h2 data-i18n="title">铁路信息查询</h2>
+            <h2 data-i18n="app-title">铁路信息查询</h2>
             <div class="search-wraper" role="search">
             <div class="form-group">
-                <input class="form-control search clearable" placeholder="动车组车次 / 车站名 / 车站代码" autocomplete="off">
+                <input class="form-control search clearable" autocomplete="off">
                 <i class="fa fa-search"></i>
             </div>
             </div>
-            <p><span class="hidden-xs">当前收录</span><span class="visible-xs-inline">共</span> <strong id="stations">0</strong> 座车站，<strong id="trains">0</strong> 个车次</p>
-            <div><a title="95306：营业站服务信息查询" href="http://hyfw.95306.cn/hyinfo/action/FwcszsAction_index?type=1" target="_blank">车站数据</a>版本：<span id="stations_ver">...</span></div>
-            <div><a title="新浪微博：CRH380AL动车组" href="https://weibo.com/u/2646253421" target="_blank">交路数据</a>版本：<span id="trains_ver">...</span></div>
             <div id="client" class="hidden">
-                安装<a id="ext" class="hidden" target="_blank" href="https://greasyfork.org/zh-CN/scripts/33266" title="Greasy Fork：动车组交路查询">浏览器扩展</a><!--
-                ---><a id="ios" class="hidden" target="_blank" href="https://apps.apple.com/cn/app/id1471687297" title="App Store：动车组交路查询">手机客户端</a><!--
-                ---><a id="apk" class="hidden" target="_blank" href="ml.moerail.apk" title="下载动车组查询 App">手机客户端</a>，查询更便捷
+                <a id="ext" class="hidden" target="_blank" data-i18n="app-download-ext" href="https://greasyfork.org/zh-CN/scripts/33266" title="Greasy Fork：动车组交路查询">下载浏览器扩展</a>
+                <a id="ios" class="hidden" target="_blank" data-i18n="app-download-ios" href="https://apps.apple.com/cn/app/id1471687297" title="App Store：动车组交路查询">下载 iOS 客户端</a>
+                <a id="apk" class="hidden" target="_blank" data-i18n="app-download-apk" href="ml.moerail.apk" title="动车组查询 App">下载 Android 客户端</a>
             </div>
-            <div id="offline" class="hidden">当前离线，部分功能不可用</div>
+            <div id="offline" class="hidden" data-i18n="app-offline">当前离线，部分功能不可用</div>
         </div></div>
     </div>
     <img id="ribbon" alt="Fork me on GitHub" usemap="#triangle" src="https://cdn.jsdelivr.net/gh/aral/fork-me-on-github-retina-ribbons/images/fork-me-right-graphite@2x.png">
@@ -44,43 +41,60 @@
         <table id="station-list" class="table table-hover component">
             <thead><tr>
                 <th><!-- 办理限制 --></th>
-                <th data-i18n="station-name">站名</th>
-                <th data-i18n="station-company">路局</th>
-                <th data-i18n="station-province">省<span class="hidden-xs">份</span></th>
-                <th data-i18n="station-telegraph">电报<span class="hidden-xs">码</span></th>
-                <th data-i18n="station-pinyin">拼音<span class="hidden-xs">码</th>
-                <th data-i18n="station-tmis">TMIS</th>
+                <th><span class="visible-xs" data-i18n="station-name-abbr">站名</span><span class="hidden-xs" data-i18n="station-name">车站名称</span></th>
+                <th><span class="visible-xs" data-i18n="station-corporation-abbr">路局</span><span class="hidden-xs" data-i18n="station-corporation">所属集团公司</span></th>
+                <th><span class="visible-xs" data-i18n="station-province-abbr">省</span><span class="hidden-xs" data-i18n="station-province">省级行政区</span></th>
+                <th><span class="visible-xs" data-i18n="station-telegraph-abbr">电报</span><span class="hidden-xs" data-i18n="station-telegraph">电报码</span></th>
+                <th><span class="visible-xs" data-i18n="station-pinyin-abbr">拼音</span><span class="hidden-xs" data-i18n="station-pinyin">拼音码</span></th>
+                <th><abbr data-i18n="station-tmis-abbr">TMIS</abbr></th>
             </tr></thead>
             <tbody>
             </tbody>
         </table>
         <table id="train-list" class="table table-hover hidden component">
             <thead><tr>
-                <th>车组号</th>
-                <th><span class="hidden-xs">担当</span>车次</th>
-                <th>日期</th>
+                <th data-i18n="train-vehicle-number"></th>
+                <th data-i18n="train-running-number"></th>
+                <th data-i18n="train-date"></th>
             </tr></thead>
             <tbody>
+            </tbody>
+        </table>
+        <table id="uic-list" class="table table-hover hidden component">
+            <thead><tr>
+                <th><!-- number --></th>
+                <th data-i18n="uic-component"></th>
+                <th data-i18n="uic-explanation"></th>
+            </tr></thead>
+            <tbody>
+                <tr><td data-length="2"></td><td data-i18n="uic-type"></td><td></td></tr>
+                <tr><td data-length="2"></td><td data-i18n="uic-country"></td><td></td></tr>
+                <tr><td data-length="2"></td><td data-i18n="uic-subtype"></td><td></td></tr>
+                <tr><td data-length="2"></td><td data-i18n="uic-tech"></td><td></td></tr>
+                <tr><td data-length="3"></td><td data-i18n="uic-serial"></td><td></td></tr>
+                <tr><td data-length="1"></td><td data-i18n="uic-checksum"></td><td></td></tr>
             </tbody>
         </table>
     </div></div>
 </main>
 
 <footer><div class="container">
-    Designed by <a title="GitHub" href="https://github.com/Arnie97" target="_blank">Arnie97</a>
+    <span data-i18n="app-designed-by">Designed by</span>
+    <a title="GitHub" href="https://github.com/Arnie97" target="_blank">Arnie97</a>
 </div></footer>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/tablesorter@2.31.1/dist/js/jquery.tablesorter.min.js" integrity="sha256-uC1JMW5e1U5D28+mXFxzTz4SSMCywqhxQIodqLECnfU=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-i18n-properties@1.2.7/jquery.i18n.properties.min.js" integrity="sha256-5YyE0WhrAHKo7h3XyvKQgMhH9g3e0TG8Y9VR36Pm87A=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@wikimedia/jquery.i18n@1.0.7/src/jquery.i18n.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@wikimedia/jquery.i18n@1.0.7/src/jquery.i18n.messagestore.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@wikimedia/jquery.i18n@1.0.7/src/jquery.i18n.fallbacks.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/gh/btmills/geopattern@1.2.3/js/geopattern.min.js" integrity="sha256-AOyAcXCKLfI+FRdiZr4VTj9h9Wwv0YXXa2CPfUWbBS8=" crossorigin="anonymous"></script>
 <script src="station_name.js"></script>
 <script src="polyfill.js"></script>
 <script src="bureau.js"></script>
 <script src="version.js"></script>
-<script src="telecode.js"></script>
+<script src="telecode.js?3"></script>
 
 </body>
 </html>

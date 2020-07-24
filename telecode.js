@@ -12,13 +12,21 @@ function main() {
         $('#ext,#client').removeClass('hidden');
     }
 
-    $('#stations').text(stations.length);
+    $.i18n().load({
+        'en': '/i18n/en.json',
+        'fr': '/i18n/fr.json',
+        'zh': '/i18n/zh.json',
+    }).done(function() {
+        $('html').i18n();
+        $('input.search').prop('placeholder', $.i18n('app-search-placeholder'));
+    });
+
     $('header,footer').geopattern(Math.random().toString());
     $('img#ribbon').on('click', function() {
         $('input.search').focus();
     });
     $('input.search').on('change', function() {
-        location.hash = '#' + escape($('input.search').val());
+        location.hash = '#' + escape($('input.search').val().replace(' ', ''));
     });
     $(window).on('hashchange', function() {
         var inputText = unescape(location.hash.slice(1)).toUpperCase();
@@ -31,6 +39,12 @@ function main() {
 
 function query(s) {
     $('.component').addClass('hidden');
+    if (s.match(/^\d{6,}$/)) {
+        $('#uic-list').removeClass('hidden');
+        uicExplain(s);
+        return;
+    }
+
     if (s.match(/^0?[GDC]\d{1,4}$/)) {
         $('#train-list').removeClass('hidden');
         loadTrains(API_ROOT + '/train/' + $('input.search').val(), s);
@@ -84,7 +98,7 @@ function formatTrain(i) {
     if (match) {
         i.emu_no = match[1] + "-" + match[2];
     }
-    i = [i.emu_no, i.train_no, i.date.substring(0, 16), train_no_link];
+    i = [i.emu_no, i.train_no, i.date, train_no_link];
     i.link(0, '/#{0}');
     i.link(1, '/#{3}');
     i.link(2, "showTrainRouteGraph(this, '{3}');")
@@ -93,7 +107,7 @@ function formatTrain(i) {
 
 function loadTrains(url, trainNumber) {
     var msg = '<tr><td>-</td><td>-</td><td>{0}</td></tr>';
-    show([msg.format(['少女祈祷中…'])]);
+    show([msg.format(['<span data-i18n="app-loading-in-progress"></span>'])]);
     $.getJSON(url).done(function(results) {
         if (results.length) {
             show(results.map(formatTrain));
@@ -102,13 +116,13 @@ function loadTrains(url, trainNumber) {
             show([formatTrain({
                 'emu_no': '-',
                 'train_no': trainNumber,
-                'date': '显示交路图…',
+                'date': '<span data-i18n="app-show-train-route-graph"></span>',
             })]);
         } else {
-            show([msg.format(['暂未收录'])]);
+            show([msg.format(['<span data-i18n="app-not-available"></span>'])]);
         }
     }).fail(function() {
-        show([msg.format(['加载失败'])]);
+        show([msg.format(['<span data-i18n="app-loading-failed"></span>'])]);
     });
 }
 
@@ -131,6 +145,7 @@ function showTrainRouteGraph(link, trainNumber) {
 function show(tableRows) {
     $('table:not(.hidden)>tbody').html(tableRows.join());
     $('table:not(.hidden)').trigger('update');
+    $('table:not(.hidden)').i18n();
 }
 
 function matchKeyword(s) {
@@ -157,6 +172,23 @@ function matchKeyword(s) {
             return i[0] === s.toLowerCase() || i[2].slice(0, 3) === s;
         });
     }
+}
+
+function uicExplain(s) {
+    var mock = [
+        'Electric multiple-unit set (high speed, power car or trailer)',
+        'RC China',
+        'Vehicles with 1st class seats',
+        '121 to 140 km/h, 1 000 V~ + 1 500 V~ + 1 500 V ='];
+    var position = 0;
+    $('#uic-list>tbody>tr').each(function(i, elem) {
+        var length = parseInt(elem.firstChild.dataset.length);
+        var number = s.substr(position, length);
+        elem.firstChild.textContent = number;
+        elem.lastChild.textContent = (number.length > 0)? mock[i]: '';
+        elem.className = (number.length > 0)? '': 'hidden';
+        position += length;
+    });
 }
 
 $(main);
