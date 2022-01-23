@@ -14,7 +14,7 @@ function main() {
 
     $('#stations').text(stations.length);
     $('header,footer').geopattern(Math.random().toString());
-    $('img#ribbon').on('click', function() {
+    $('.github-fork-ribbon').on('click', function() {
         $('input.search').focus();
     });
     $('input.search').on('change', function() {

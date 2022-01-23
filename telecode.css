@@ -16,22 +16,6 @@ h2 {
     border: 0;
 }
 
-#ribbon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: 0;
-    width: 100px;
-    height: 100px;
-}
-
-@media screen and (min-width: 768px) {
-    #ribbon {
-        width: 149px;
-        height: 149px;
-    }
-}
-
 main {
     margin-bottom: 60px;
 }
@@ -56,6 +40,19 @@ header a:hover, footer a:hover {
     color: #fff;
     border-bottom: solid 1px #ddd;
     text-decoration: none;
+}
+
+header a.github-fork-ribbon {
+    border-bottom: none;
+}
+
+header .github-fork-ribbon:before {
+    background-color: #333;
+}
+
+header .github-fork-ribbon:after {
+    border-style: dashed;
+    border-color: #777;
 }
 
 header {
