@@ -27,8 +27,8 @@ Array.prototype.link = function(i, url) {
 };
 
 String.prototype.format = function(args) {
-    return this.replace(/{(\d+)}/g, function(match, number) {
-        return typeof args[number] != 'undefined'? args[number]: match;
+    return this.replace(/{(\w+)}/g, function(match, key) {
+        return typeof args[key] != 'undefined'? args[key]: match;
     });
 };
 
@@ -41,5 +41,11 @@ if (!String.prototype.startsWith) {
 if (!String.prototype.includes) {
     String.prototype.includes = function(s, position) {
         return this.indexOf(s, position || 0) !== -1;
+    };
+}
+
+if (!String.prototype.trim) {
+    String.prototype.trim = function() {
+        return this.replace(/^\s+|\s+$/g, '');
     };
 }

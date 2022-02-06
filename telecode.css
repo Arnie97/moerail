@@ -107,17 +107,15 @@ header .search-wraper {
 }
 
 header .search {
-    -webkit-box-shadow: none;
     box-shadow: none;
     font-size: 16px;
-    padding: 13px 30px;
+    padding: 12px 30px;
     height: auto;
     text-align: center;
     border-color: transparent;
 }
 
 header .search:focus {
-    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.6);
     box-shadow: 0 0 10px rgba(0,0,0,.6);
 }
 
@@ -129,15 +127,16 @@ header .search+.fa.onX {
     cursor: pointer;
 }
 
-#station_list td:nth-child(1), #station_list th:nth-child(1) {
-    padding-right: 0px;
+#station-list td:nth-child(1), #station-list th:nth-child(1) {
+    text-align: right;
+    padding-right: 1px;
 }
 
-#station_list td:nth-child(2), #station_list th:nth-child(2) {
+#station-list td:nth-child(2), #station-list th:nth-child(2) {
     padding-left: 1px;
 }
 
-#station_list .joint {
+#station-list .joint {
     border-bottom: black solid 1px;
 }
 
@@ -145,11 +144,24 @@ header .search+.fa.onX {
     position: relative;
 }
 
-#toggle_emu_list {
-    float: right;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    font-size: 120%;
-    padding: 5px;
+dl.center-block {
+    float: none;
+    margin: 0 auto;
+}
+
+dt {
+    font-size: 125%;
+}
+
+dd {
+    margin: 5px 0px 20px;
+}
+
+dd a {
+    border-bottom: dotted 1px #222;
+}
+
+dd a:hover {
+    border-bottom: solid 1px #222;
+    text-decoration: none;
 }

@@ -18,10 +18,14 @@ function main() {
         $('input.search').focus();
     });
     $('input.search').on('change', function() {
-        location.hash = '#' + escape($('input.search').val());
+        location.hash = '#' + escape($(this).val());
+    }).on('keypress', function(event) {
+        if (event.which == '\r'.charCodeAt(0)) {
+            $(this).trigger('change');
+        };
     });
     $(window).on('hashchange', function() {
-        var inputText = unescape(location.hash.slice(1)).toUpperCase();
+        var inputText = unescape(location.hash.slice(1)).trim().toUpperCase();
         $('input.search').val(inputText);
         return query(inputText);
     });
@@ -41,9 +45,11 @@ function query(s) {
     if (results.length) {
         $('#station-list').removeClass('hidden');
         show(results.map(formatStation));
-    } else {
+    } else if (/^[-\w]+$/.test(s)) {
         $('#train-list').removeClass('hidden');
         loadTrains(API_ROOT + '/emu/' + s);
+    } else {
+        $('#station-list').removeClass('hidden');
     }
 }
 
@@ -53,14 +59,15 @@ function formatStation(i) {
     i.push('<span class="hidden-xs">{0}</span><span class="visible-xs-block">{1}</span>'.format(pair));
     i.push(i[1].match(/[^(]+/));
 
-    var bit_mask = parseInt(i[4].slice(1), 36) || 0, prefixes = '';
+    var prefixes = '',
+        bitMask = parseInt(i[4].slice(1), 36) || 0;
     i[4] = i[4].slice(0, 1);
-    for (var j = 0; j < restrictions.length; j++) {
-        if (bit_mask & 1 << j) {
+    for (var j = restrictions.length; j >= 0; j--) {
+        if (bitMask & 1 << j) {
             if (j) {
                 prefixes += restrictions[j];
             } else {
-                i[1] = '<span class="joint">{1}</span>'.format(i);
+                i[1] = '<strong class="joint">{1}</strong>'.format(i);
             }
         }
     }
@@ -72,7 +79,7 @@ function formatStation(i) {
     i.link(1, 'https://zh.wikipedia.org/zh-cn/{6}站');
     i.link(2, 'https://jprailfan.com/tools/stat/?telecode={2}');
     i.link(0, 'https://jprailfan.com/tools/stat/?pinyincode={0}');
-    i.link(3, 'http://hyfw.95306.cn/hyinfo/action/FwcszsAction_czcx?hzzm&tmism={3}');
+    i.link(3, 'https://ec.95306.cn/hwyszy/czjj?tmism={3}&hzzm={6}');
     i.link(4, 'https://www.amap.com/search?query={6}站');
     i.link(5, API_ROOT + '/map/{6}');
     return '<tr><td>{7}</td><td>{1}</td><td>{5}</td><td>{4}</td><td>{2}</td><td>{0}</td><td>{3}</td></tr>'.format(i);
@@ -150,7 +157,7 @@ function matchKeyword(s) {
         });
     } else if (s.charCodeAt(0) > 'z'.charCodeAt(0)) {
         return (function(i) {
-            return i[1].startsWith(s);
+            return i[1].startsWith(s.replace(/(?:火?车)?站$/, ''));
         });
     } else {
         return (function(i) {
