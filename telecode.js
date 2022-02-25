@@ -45,7 +45,7 @@ function query(s) {
     if (results.length) {
         $('#station-list').removeClass('hidden');
         show(results.map(formatStation));
-    } else if (/^[-\w]+$/.test(s)) {
+    } else if (/^[-\+\w@]+$/.test(s)) {
         $('#train-list').removeClass('hidden');
         loadTrains(API_ROOT + '/emu/' + s);
     } else {
