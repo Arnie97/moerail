@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>车票识别 - 铁路信息查询</title>
+    <meta name="author" content="Arnie97">
+    <link rel="preconnect" href="https://mobile.12306.cn">
+    <link rel="dns-prefetch" href="https://mobile.12306.cn">
+    <link rel="stylesheet" href="ticket.css">
+</head>
+
+<body>
+<div class="ticket">
+    <div class="row">
+        <span class="ticket-number" data-slice="0:7"></span>
+        <span class="right">
+            <span id="office" data-slice="50:55"></span>
+            <span class="circled">售</span>
+        </span>
+    </div>
+
+    <div class="row primary">
+        <span data-slice="7:10" class="station left"></span>
+        <div class="train-code middle"><span
+            data-slice="16:19" class="train-code">&nbsp;</span><span
+            data-slice="19:24" class="train-code trim-zeros"></span><span
+            data-show-if="49:50:1">次</span><span
+            class="arrow"></span>
+        </div>
+        <span data-slice="10:13" class="station right"></span>
+    </div>
+
+    <div class="row">
+        <span><span
+            data-slice="38:42">2009</span>年<span
+            data-slice="42:44">12</span>月<span
+            data-slice="44:46">09</span>日<span
+            data-slice="-7:-5">18</span>:<span
+            data-slice="-5:-3">00</span>开
+        </span>
+        <span class="right"><span
+            data-slice="24:26" id="coach-number"></span>车<span
+            data-slice="30:33" id="seat-number"></span><span
+            data-show-if="29:30:[^3]">号</span><span
+            data-slice="29:30" id="seat-info"></span>
+        </span>
+    </div>
+
+    <div class="row">
+        <span id="price">¥<span
+            data-slice="33:37" class="trim-zeros">0</span>.<span
+            data-slice="37:38">0</span></span>元
+        <span data-slice="27:29" id="ticket-type" class="middle circled"></span>
+        <span class="right"><span
+            data-slice="26:27" id="seat-type"></span><span
+            data-show-if="13:16:^(?!AAA)">至<span
+            data-slice="13:16" class="station"></span></span>
+        </span>
+    </div>
+
+    <div class="row">
+        限乘当日当次车
+        <span data-show-if="46:47:1">随原票使用</span>
+        <span data-show-if="13:16:^(?!AAA)">在2日内到有效</span>
+        <span data-show-if="68:70:24">随乘车证有效</span>
+    </div>
+
+    <div class="row" data-slice="90:-7" id="id-name">&nbsp;</div>
+    <div class="row" data-slice="68:90" id="id-number">&nbsp;</div>
+
+    <div class="row">
+        <div>
+            <span data-slice="50:55"></span>
+            <span data-slice="55:60"></span>
+            <span data-slice="64:68"></span>
+            <span data-slice="0:7">&nbsp;</span>
+        </div>
+        <div id="qr-code"></div>
+    </div>
+</div>
+
+<iframe src="/"></iframe>
+<script type="application/javascript" src="https://mobile.12306.cn/weixin/resources/weixin/js/jquery.min.js"></script>
+<script type="application/javascript" src="https://mobile.12306.cn/weixin/resources/js/framework/station_name.js?version=2.00"></script>
+<script type="application/javascript" src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-12-M/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+<script type="application/javascript" src="ticket.js"></script>
+
+</body>
+
+</html>

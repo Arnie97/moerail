@@ -1,0 +1,134 @@
+html, body {
+    background: transparent;
+    font: 14px/1.25 Helvetica, Arial, "PingFang SC", "STHeiti", "Microsoft YaHei", sans-serif;
+    zoom: 1;
+}
+
+.ticket {
+    background: #ecc url('bg.png') -10px -50px / 110px 95px;
+    padding: 12px;
+    border: 12px solid #eee;
+    margin: 12px auto;
+    max-width: 280px;
+}
+
+.ticket-number {
+    display: inline-block;
+    font: larger monospace;
+    color: #b43;
+}
+
+.row {
+    position: relative;
+    padding: 1px 0;
+}
+
+.row .left, .row .middle, .row .right {
+    display: inline-block;
+    position: absolute;
+}
+
+.row .left {
+    left: 0;
+}
+
+.row .right {
+    right: 0;
+}
+
+.row .middle, .primary .station::after {
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.primary.row {
+    margin: 2px 8px 48px;
+}
+
+.primary .station {
+    min-width: 64px;
+    text-align-last: justify;
+    font: 135% sans-serif;
+}
+
+.primary .station::after {
+    content: attr(data-pinyin);
+    text-align: center;
+    text-transform: capitalize;
+    font: 60% serif;
+    position: absolute;
+    top: 24px;
+}
+
+.train-code {
+    width: 72px;
+    text-align: center;
+}
+
+.train-code span {
+    vertical-align: baseline;
+}
+
+.train-code span.train-code, #price {
+    font: large serif;
+}
+
+.train-code .arrow, .arrow::before {
+    display: block;
+    height: 1px;
+    background: #000;
+}
+
+.train-code .arrow {
+    position: relative;
+    width: 100%;
+}
+
+.train-code .arrow:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    transform-origin: top right;
+    transform: rotate(30deg);
+}
+
+.circled:not(:empty) {
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid;
+}
+
+.circled:before, .circled:after {
+    content: '\200B';
+    display: inline-block;
+    line-height: 0;
+    padding-top: 50%;
+    padding-bottom: 50%;
+}
+
+.circled:before {
+    padding-left: 1px;
+}
+
+.circled:after {
+    padding-right: 1px;
+}
+
+#id-number {
+    white-space: pre;
+}
+
+#qr-code canvas {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    background: #555;
+}
+
+iframe {
+    display: none;
+}
