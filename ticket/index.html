@@ -53,10 +53,11 @@
             data-slice="33:37" class="trim-zeros">0</span>.<span
             data-slice="37:38">0</span></span>元
         <span data-slice="27:29" id="ticket-type" class="middle circled"></span>
-        <span class="right"><span
-            data-slice="26:27" id="seat-type"></span><span
-            data-show-if="13:16:^(?!AAA)">至<span
-            data-slice="13:16" class="station"></span></span>
+        <span class="right">
+            <span data-slice="26:27" id="seat-type"></span>
+            <span data-show-if="13:16:^(?!AAA)">
+                至<span data-slice="13:16" class="station"></span>
+            </span>
         </span>
     </div>
 
@@ -65,6 +66,9 @@
         <span data-show-if="46:47:1">随原票使用</span>
         <span data-show-if="13:16:^(?!AAA)">在2日内到有效</span>
         <span data-show-if="68:70:24">随乘车证有效</span>
+    </div>
+    <div class="row">
+        <span data-show-if="46:47:1">中转签证 中转<span>
     </div>
 
     <div class="row" data-slice="90:-7" id="id-name">&nbsp;</div>
@@ -81,10 +85,11 @@
     </div>
 </div>
 
-<iframe src="/"></iframe>
 <script type="application/javascript" src="https://mobile.12306.cn/weixin/resources/weixin/js/jquery.min.js"></script>
 <script type="application/javascript" src="https://mobile.12306.cn/weixin/resources/js/framework/station_name.js?version=2.00"></script>
 <script type="application/javascript" src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-12-M/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+<script type="application/javascript" src="/station.js"></script>
+<script type="application/javascript" src="/bureau.js"></script>
 <script type="application/javascript" src="ticket.js"></script>
 
 </body>

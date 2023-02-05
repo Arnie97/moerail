@@ -32,6 +32,16 @@ $('.trim-zeros').each(function () {
 });
 
 
+$('#office').text(function(_, officeNumber) {
+    var office = stations.find(function(s) {
+        return s[3] === officeNumber;
+    });
+    if (office) {
+        return office[1];
+    }
+});
+
+
 var stationMap = {'JQO': ['红磡(九龙)', 'HungHom(Kowloon)']};
 station_names.slice(1).split('@').forEach(function(station) {
     station = station.split('|', 4);
@@ -136,17 +146,4 @@ $('#id-number').text(function(_, value) {
         return ' ';
     }
     return value.slice(-value.slice(2, 4));
-});
-
-
-$('iframe').on('load', function() {
-    var stations = this.contentWindow.stations;
-    $('#office').text(function(_, officeNumber) {
-        var office = stations.find(function(s) {
-            return s[3] === officeNumber;
-        });
-        if (office) {
-            return office[1];
-        }
-    });
 });

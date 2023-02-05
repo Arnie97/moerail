@@ -25,9 +25,14 @@
                 <i class="fa fa-search"></i>
             </div>
             </div>
-            <p><span class="hidden-xs">当前收录</span><span class="visible-xs-inline">共</span> <strong id="stations">0</strong> 座车站，<strong id="trains">0</strong> 个车次</p>
-            <div><a title="95306：营业站服务信息查询" href="http://hyfw.95306.cn/hyinfo/action/FwcszsAction_index?type=1" target="_blank">车站数据</a>版本：<span id="stations_ver">...</span></div>
-            <div><a title="新浪微博：CRH380AL动车组" href="https://weibo.com/u/2646253421" target="_blank">交路数据</a>版本：<span id="trains_ver">...</span></div>
+            <p>
+                <span class="hidden-xs">当前收录</span>
+                <strong id="stations">0</strong> 座车站，<strong id="trains">0</strong> 个车次
+            </p>
+            <div><a href="https://kyfw.12306.cn/otn/resources/js/framework/station_name.js" target="_blank">
+                车站数据</a>版本：<span id="stations-version">...</span></div>
+            <div><a href="https://github.com/arnie97/emu-log" target="_blank">
+                交路数据</a>版本：<span id="trains-version">...</span></div>
             <div id="client" class="hidden">
                 安装<a id="ext" class="hidden" target="_blank" href="https://greasyfork.org/zh-CN/scripts/33266" title="Greasy Fork：动车组交路查询">浏览器扩展</a><!--
                 ---><a id="ios" class="hidden" target="_blank" href="https://apps.apple.com/cn/app/id1471687297" title="App Store：动车组交路查询">手机客户端</a><!--
@@ -68,13 +73,16 @@
 
 <footer><div class="container">
     Designed by <a title="GitHub" href="https://github.com/Arnie97" target="_blank">Arnie97</a>
+    &middot;
+    <a href="/links">Links &amp; Tips</a>
 </div></footer>
 
 <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-12-M/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-12-M/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-12-M/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js" integrity="sha256-uC1JMW5e1U5D28+mXFxzTz4SSMCywqhxQIodqLECnfU=" crossorigin="anonymous"></script>
 <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-12-M/geopattern/1.2.3/js/geopattern.min.js" integrity="sha256-AOyAcXCKLfI+FRdiZr4VTj9h9Wwv0YXXa2CPfUWbBS8=" crossorigin="anonymous"></script>
-<script src="station_name.js"></script>
+
+<script src="station.js"></script>
 <script src="polyfill.js"></script>
 <script src="bureau.js"></script>
 <script src="version.js"></script>

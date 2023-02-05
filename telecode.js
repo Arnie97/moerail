@@ -1,5 +1,7 @@
 'use strict';
 
+var API_ROOT = 'https://api.moerail.ml';
+
 function main() {
     var ua = navigator.userAgent;
     if (navigator.onLine === false) {

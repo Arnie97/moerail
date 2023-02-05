@@ -15,7 +15,7 @@ bureauNames.split('@').forEach(function(item) {
     }
 });
 
-var stations = station_names.split('@').map(function(i) {
+var stations = stationNames.split('@').map(function(i) {
     return i.split('|');
 });
 stations.shift();
