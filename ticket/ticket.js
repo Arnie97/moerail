@@ -43,6 +43,10 @@ $('#office').text(function(_, officeNumber) {
 
 
 var stationMap = {'JQO': ['红磡(九龙)', 'HungHom(Kowloon)']};
+stationNames.slice(1).split('@').forEach(function(station) {
+    station = station.split('|', 4);
+    stationMap[station[2].slice(0, 3)] = [station[1], station[2].slice(0, 3)];
+});
 station_names.slice(1).split('@').forEach(function(station) {
     station = station.split('|', 4);
     stationMap[station[2]] = [station[1], station[3]];
@@ -55,6 +59,22 @@ $('.station').each(function () {
     }
     this.textContent = station[0];
     this.dataset.pinyin = station[1];
+});
+
+
+$('#year').click(function() {
+    $(this).text(function(_, value) {
+        value -= 7;
+        if (value > 2009) {
+            return value;
+        }
+        var now = new Date().getFullYear();
+        value = now - now % 7 + value % 7;
+        if (value > now) {
+            value -= 7;
+        }
+        return value;
+    });
 });
 
 

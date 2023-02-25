@@ -25,8 +25,7 @@
         <span data-slice="7:10" class="station left"></span>
         <div class="train-code middle"><span
             data-slice="16:19" class="train-code">&nbsp;</span><span
-            data-slice="19:24" class="train-code trim-zeros"></span><span
-            data-show-if="49:50:1">次</span><span
+            data-slice="19:24" class="train-code trim-zeros"></span>次<span
             class="arrow"></span>
         </div>
         <span data-slice="10:13" class="station right"></span>
@@ -34,7 +33,7 @@
 
     <div class="row">
         <span><span
-            data-slice="38:42">2009</span>年<span
+            data-slice="38:42" id="year">2009</span>年<span
             data-slice="42:44">12</span>月<span
             data-slice="44:46">09</span>日<span
             data-slice="-7:-5">18</span>:<span
@@ -68,7 +67,10 @@
         <span data-show-if="68:70:24">随乘车证有效</span>
     </div>
     <div class="row">
-        <span data-show-if="46:47:1">中转签证 中转<span>
+        <span data-show-if="46:47:1">
+            <span data-show-if="33:38:00000">中转签证</span>
+            中转
+        <span>
     </div>
 
     <div class="row" data-slice="90:-7" id="id-name">&nbsp;</div>
@@ -86,7 +88,7 @@
 </div>
 
 <script type="application/javascript" src="https://mobile.12306.cn/weixin/resources/weixin/js/jquery.min.js"></script>
-<script type="application/javascript" src="https://mobile.12306.cn/weixin/resources/js/framework/station_name.js?version=2.00"></script>
+<script type="application/javascript" src="https://kyfw.12306.cn/otn/resources/js/framework/station_name.js"></script>
 <script type="application/javascript" src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-12-M/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
 <script type="application/javascript" src="/station.js"></script>
 <script type="application/javascript" src="/bureau.js"></script>
