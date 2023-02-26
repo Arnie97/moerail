@@ -1,11 +1,28 @@
 var info = decodeURI(location.hash.slice(1));
-if (info.length < 144 + 1 + 110) {
+if (/^[A-Z]\d{10,13}[A-Z]\d{6}$/.test(info)) {
+    var qrCode = info;
+    if (info.length == 18) {
+        info = info.slice(0, 11) + '   ' + info.slice(11);
+    }
+    info = [
+        info.slice(14),
+        '      AAA        31W010   0000020??',
+        info.slice(10, 14),
+        '-   ',
+        info.slice(0, 10),
+        '    ',
+        info.slice(10, 14),
+        '00????   ',
+    ].join('');
+} else if (/^\d{144}-\w{16}.{8}\w{66}.{10,20}\d{7}$/.test(info)) {
+    var qrCode = info.slice(0, 144);
+    info = info.slice(144 + 1);
+} else {
     $('.ticket').text('参数错误');
+    throw new Error();
 }
 
 
-var qrCode = info.slice(0, 144);
-info = info.slice(144 + 1);
 $('#qr-code').qrcode({
     text: qrCode,
     correctLevel: 1,
@@ -28,7 +45,7 @@ $('[data-show-if]').each(function() {
 });
 
 $('.trim-zeros').each(function () {
-    this.textContent = +this.textContent;
+    this.textContent = this.textContent.trim() && +this.textContent;
 });
 
 
@@ -135,7 +152,7 @@ function seatName(seatNumber, seatInfo) {
         }
 
         return [
-            seatNumber.slice(0, -1),
+            '0' + seatNumber.slice(0, -1),
             '下中上'[seatNumber.slice(-1) - 1] + '铺',
         ];
     }
@@ -148,6 +165,16 @@ $('#seat-number').text(function(_, seatNumber) {
         return seat[1];
     });
     return seatNumber;
+});
+
+
+$('#validity').click(function() {
+    this.innerText = +this.innerText + 1;
+});
+$('#bureau').text(function (_, value) {
+    if (bureaus[value]) {
+        return bureaus[value][1];
+    }
 });
 
 

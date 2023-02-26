@@ -32,14 +32,14 @@
     </div>
 
     <div class="row">
-        <span><span
+        <span data-show-if="44:46:\S"><span
             data-slice="38:42" id="year">2009</span>年<span
             data-slice="42:44">12</span>月<span
             data-slice="44:46">09</span>日<span
             data-slice="-7:-5">18</span>:<span
             data-slice="-5:-3">00</span>开
         </span>
-        <span class="right"><span
+        <span data-show-if="30:33:\S" class="right"><span
             data-slice="24:26" id="coach-number"></span>车<span
             data-slice="30:33" id="seat-number"></span><span
             data-show-if="29:30:[^3]">号</span><span
@@ -62,15 +62,18 @@
 
     <div class="row">
         限乘当日当次车
-        <span data-show-if="46:47:1">随原票使用</span>
-        <span data-show-if="13:16:^(?!AAA)">在2日内到有效</span>
+        <span data-show-if="46:47:[^0]">随原票使用</span>
+        <span data-show-if="13:16:^(?!AAA)">在<span id="validity">2</span>日内到有效</span>
         <span data-show-if="68:70:24">随乘车证有效</span>
     </div>
     <div class="row">
         <span data-show-if="46:47:1">
             <span data-show-if="33:38:00000">中转签证</span>
             中转
-        <span>
+        </span>
+        <span data-show-if="46:47:-">
+            <span data-slice="50:51" id="bureau"></span>??客运段补
+        </span>
     </div>
 
     <div class="row" data-slice="90:-7" id="id-name">&nbsp;</div>

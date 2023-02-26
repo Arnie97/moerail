@@ -9,7 +9,7 @@ html, body {
     padding: 12px;
     border: 12px solid #eee;
     margin: 12px auto;
-    max-width: 280px;
+    width: 280px;
 }
 
 .ticket-number {
