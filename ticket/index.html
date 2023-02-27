@@ -16,7 +16,7 @@
     <div class="row">
         <span class="ticket-number" data-slice="0:7"></span>
         <span class="right">
-            <span id="office" data-slice="50:55"></span>
+            <span id="office" class="manual-mod" data-slice="50:55"></span>
             <span class="circled">售</span>
         </span>
     </div>
@@ -61,7 +61,7 @@
     </div>
 
     <div class="row">
-        限乘当日当次车
+        <span id="manual-mod">限乘当日当次车</span>
         <span data-show-if="46:47:[^0]">随原票使用</span>
         <span data-show-if="13:16:^(?!AAA)">在<span id="validity">2</span>日内到有效</span>
         <span data-show-if="68:70:24">随乘车证有效</span>
@@ -71,7 +71,7 @@
             <span data-show-if="33:38:00000">中转签证</span>
             中转
         </span>
-        <span data-show-if="46:47:-">
+        <span data-show-if="46:47:-" class="manual-mod">
             <span data-slice="50:51" id="bureau"></span>??客运段补
         </span>
     </div>

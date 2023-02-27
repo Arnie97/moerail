@@ -57,6 +57,9 @@ $('#office').text(function(_, officeNumber) {
         return office[1];
     }
 });
+$('.manual-mod').click(function() {
+    this.innerText = prompt('票面修正', this.innerText);
+});
 
 
 var stationMap = {'JQO': ['红磡(九龙)', 'HungHom(Kowloon)']};
@@ -142,9 +145,8 @@ function seatName(seatNumber, seatInfo) {
     case 4: case 5:
         var row = Math.floor(seatNumber / 6);
         var column = String.fromCharCode(seatNumber % 6 + 'A'.charCodeAt());
-        var prefix = Math.floor(row / 22) || '';
-        var suffix = ('0' + (row % 22 + 1)).slice(-2);
-        return [prefix + suffix + column, ''];
+        row = ('0' + (row + 1)).slice(-2);
+        return [row + column, ''];
 
     default:
         if (seatType[0] < 3) {
