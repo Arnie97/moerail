@@ -64,15 +64,18 @@ function formatStation(i) {
     var prefixes = '',
         bitMask = parseInt(i[4].slice(1), 36) || 0;
     i[4] = i[4].slice(0, 1);
-    for (var j = restrictions.length; j >= 0; j--) {
-        if (bitMask & 1 << j) {
-            if (j) {
-                prefixes += restrictions[j];
-            } else {
-                i[1] = '<strong class="joint">{1}</strong>'.format(i);
-            }
+    restrictions.forEach(function(key, index) {
+        if ((index & 1) || !((key & bitMask) == key)) {
+            return;
         }
-    }
+        bitMask -= key;
+        var value = restrictions[index + 1];
+        if (value.includes('{1}')) {
+            i[1] = value.format(i);
+        } else {
+            prefixes += value;
+        }
+    });
     i.push(prefixes);
 
     if (i[2]) {

@@ -136,8 +136,13 @@ header .search+.fa.onX {
     padding-left: 1px;
 }
 
-#station-list .joint {
+#station-list .junction {
+    font-weight: bold;
     border-bottom: black solid 1px;
+}
+
+#station-list .closed {
+    text-decoration: line-through;
 }
 
 #route {
