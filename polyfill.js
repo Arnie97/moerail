@@ -1,5 +1,16 @@
 'use strict';
 
+if (!Array.prototype.find) {
+    Array.prototype.find = function(fn, thisArg) {
+        for (var i = 0; i < this.length; i++) {
+            if (fn.call(thisArg, this[i], i, this)) {
+                return this[i];
+            }
+        }
+        return undefined;
+    };
+}
+
 Array.prototype.findAll = function(fn) {
     var arr = [];
     this.forEach(function(i) {
