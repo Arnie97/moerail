@@ -54,17 +54,18 @@
         <span data-slice="27:29" id="ticket-type" class="middle circled"></span>
         <span class="right">
             <span data-slice="26:27" id="seat-type"></span>
-            <span data-show-if="13:16:^(?!AAA)">
+            <span data-show-if="13:16:^(?!AAA)" id="terminus">
                 至<span data-slice="13:16" class="station"></span>
             </span>
         </span>
     </div>
 
     <div class="row">
-        <span id="manual-mod">限乘当日当次车</span>
+        <span id="restrictions">限乘当日当次车</span>
         <span data-show-if="46:47:[^0]">随原票使用</span>
-        <span data-show-if="13:16:^(?!AAA)">在<span id="validity">2</span>日内到有效</span>
+        <span data-show-if="13:16:^(?!AAA)" id="validity">在<span>2</span>日内到有效</span>
         <span data-show-if="68:70:24">随乘车证有效</span>
+        <!-- <span data-slice="38:55"></span> -->
     </div>
     <div class="row">
         <span data-show-if="46:47:1">

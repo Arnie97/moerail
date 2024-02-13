@@ -1,6 +1,6 @@
 'use strict';
 
-var API_ROOT = 'https://api.moerail.ml';
+var API_ROOT = 'https://api.rail.re';
 
 function main() {
     var ua = navigator.userAgent;

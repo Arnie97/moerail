@@ -62,6 +62,11 @@ $('.manual-mod').click(function() {
 });
 
 
+if ($('.right.station').text() === $('#terminus .station').text() && +$('#year').text() >= 2023) {
+    $('#terminus, #validity').hide();
+    $('#restrictions').text('退票费 仅供报销使用');
+}
+
 var stationMap = {'JQO': ['红磡(九龙)', 'HungHom(Kowloon)']};
 stationNames.slice(1).split('@').forEach(function(station) {
     station = station.split('|', 4);
@@ -170,8 +175,14 @@ $('#seat-number').text(function(_, seatNumber) {
 });
 
 
-$('#validity').click(function() {
+$('#restrictions').click(function() {
+    this.innerText = '仅供报销使用';
+});
+$('#validity span').click(function() {
     this.innerText = +this.innerText + 1;
+    if (+this.innerText > 15) {
+        this.innerText = 2;
+    }
 });
 $('#bureau').text(function (_, value) {
     if (bureaus[value]) {
