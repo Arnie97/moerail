@@ -82,8 +82,8 @@ function formatStation(i) {
         i[2] = '-' + i[2].slice(0, 3);
     }
     i.link(1, 'https://zh.wikipedia.org/zh-cn/{6}站');
-    i.link(2, 'https://jprailfan.com/tools/stat/?telecode={2}');
-    i.link(0, 'https://jprailfan.com/tools/stat/?pinyincode={0}');
+    i.link(2, 'https://jprailfan.com/tools/stat/?statinfo=-{2}');
+    i.link(0, 'https://jprailfan.com/tools/stat/?statinfo={0}');
     i.link(3, 'https://ec.95306.cn/hwyszy/czjj?tmism={3}&hzzm={6}');
     i.link(4, 'https://www.amap.com/search?query={6}站');
     i.link(5, API_ROOT + '/map/{6}');
