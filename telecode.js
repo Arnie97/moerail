@@ -37,7 +37,7 @@ function main() {
 
 function query(s) {
     $('.component').addClass('hidden');
-    if (s.match(/^0?[GDC]\d{1,4}$/)) {
+    if (s.match(/^0?[XGTKDCS]\d{1,4}$/)) {
         $('#train-list').removeClass('hidden');
         loadTrains(API_ROOT + '/train/' + $('input.search').val(), s);
         return;
